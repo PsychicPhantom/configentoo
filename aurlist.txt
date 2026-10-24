@@ -1,0 +1,3 @@
+xcursor-arch-cursor-complete
+yay
+yay-debug
