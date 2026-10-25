@@ -1,3 +1,4 @@
 xcursor-arch-cursor-complete
+xmenu
 yay
 yay-debug

@@ -27,4 +27,6 @@ os-prober
 pcmanfm
 rofi
 sudo
+xbindkeys
+xdotool
 xorg-xrandr
