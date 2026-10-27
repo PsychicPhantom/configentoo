@@ -5,6 +5,7 @@ base
 base-devel
 brightnessctl
 distro-grub-themes-arch
+dmidecode
 dunst
 efibootmgr
 feh

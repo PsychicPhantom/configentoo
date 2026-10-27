@@ -137,10 +137,10 @@ exec --no-startup-id redshift -O 3500
 # My binds
 bindsym $mod+t exec pcmanFM
 bindsym Print exec flameshot gui
-bindsym $mod+backslash exec ~/edit_i3.sh
+bindsym $mod+backslash exec ~/edit-home-manager-nix.sh
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
-bindsym $mod+Shift+backslash exec ~/edit-home-manager-nix.sh
+bindsym $mod+Shift+backslash exec ~/edit_i3.sh
 bindsym $mod+Shift+s exec ~/archsync.sh
 bindsym XF86MonBrightnessUp exec brightnessctl set +5%
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
@@ -321,6 +321,7 @@ order += "wireless _first_"
 order += "volume master"
 order += "battery all"
 order += "cpu_temperature 0"
+order += "load"
 order += "cpu_usage"
 order += "memory"
 order += "disk /"
@@ -347,6 +348,11 @@ cpu_temperature 0 {
 	path = "/sys/class/thermal/thermal_zone3/temp"
 }
 
+load {
+	format = "%1min %5min %15min"
+	max_threshold = 9
+}
+
 cpu_usage {
 	format = "CPU: %usage"
 }
@@ -370,5 +376,28 @@ tztime local {
 Xcursor.theme: ArchCursorComplete
 Xcursor.size: 32
 '';
+  home.file.".bashrc".text = ''
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+PS1='[\u@\h \W]\$ '
+
+export TERMINAL=alacritty
+alias hms="home-manager switch --flake $HOME/.config/home-manager -b backup"
+export SSH_AUTH_SOCK=$(ssh-tpm-agent --print-socket)
+'';
+
+  home.file."edit_i3.sh" = {
+    text = ''
+alacritty -e nano ~/.config/home-manager/home.nix
+    '';
+    executable = true;
+};
 
 }
