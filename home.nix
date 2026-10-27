@@ -3,8 +3,8 @@
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "phantom";
-  home.homeDirectory = "/home/phantom";
+  home.username = "psychicphantom";
+  home.homeDirectory = "/home/psychicphantom";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -126,23 +126,24 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 
 # Rice
-exec --no-startup-id xrandr --output Virtual-1 --mode 1920x1080
-exec --no-startup-id feh --bg-scale ~/Wallpapers/wall.jpg
+exec --no-startup-id feh --bg-scale ~/Images/Wallpapers/wall.jpg
 exec --no-startup-id xrdb merge ~/.Xresources
 exec --no-startup-id xsetroot -cursor_name left_ptr
 exec --no-startup-id dunst &
 exec --no-startup-id idesk
 exec --no-startup-id xbindkeys
-
+exec --no-startup-id redshift -O 3500
 
 # My binds
-bindsym $mod+t exec thunar
+bindsym $mod+t exec pcmanFM
 bindsym Print exec flameshot gui
 bindsym $mod+backslash exec ~/edit_i3.sh
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 bindsym $mod+Shift+backslash exec ~/edit-home-manager-nix.sh
 bindsym $mod+Shift+s exec ~/archsync.sh
+bindsym XF86MonBrightnessUp exec brightnessctl set +5%
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -297,6 +298,77 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3status
+	font pango:monospace 14
+	height 30
 }
 '';
+  xdg.configFile."i3status/config".text = ''
+# i3status configuration file.
+# see "man i3status" for documentation.
+
+# It is important that this file is edited as UTF-8.
+# The following line should contain a sharp s:
+# ß
+# If the above line is not correctly displayed, fix your editor first!
+
+general {
+        colors = true
+        interval = 1
+}
+
+# order += "ipv6"
+order += "wireless _first_"
+order += "volume master"
+order += "battery all"
+order += "cpu_temperature 0"
+order += "cpu_usage"
+order += "memory"
+order += "disk /"
+order += "tztime local"
+
+wireless _first_ {
+        format_up = "W: (%quality at %essid) %ip"
+        format_down = "W: down"
+}
+
+volume master {
+	format = "VOL: %volume"
+	format_muted = "MUTED"
+	device = "default"
+	mixer = "Master"
+}
+
+battery all {
+        format = "%status %percentage %remaining"
+}
+
+cpu_temperature 0 {
+	format = "TEMP: %degrees C"
+	path = "/sys/class/thermal/thermal_zone3/temp"
+}
+
+cpu_usage {
+	format = "CPU: %usage"
+}
+
+memory {
+        format = "%used | %available"
+        threshold_degraded = "1G"
+        format_degraded = "MEMORY < %available"
+}
+
+disk "/" {
+        format = "DISK: %avail"
+}
+
+tztime local {
+        format = "%H:%M:%S %Y-%m-%d"
+}
+'';
+
+  home.file.".Xresources".text = ''
+Xcursor.theme: ArchCursorComplete
+Xcursor.size: 32
+'';
+
 }
