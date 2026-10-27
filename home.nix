@@ -133,6 +133,7 @@ exec --no-startup-id dunst &
 exec --no-startup-id idesk
 exec --no-startup-id xbindkeys
 exec --no-startup-id redshift -O 3500
+exec --no-startup-id ssh-tpm-agent &
 
 # My binds
 bindsym $mod+t exec pcmanFM
