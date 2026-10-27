@@ -400,4 +400,34 @@ alacritty -e nano ~/.config/home-manager/home.nix
     executable = true;
 };
 
+  home.file.".local/bin/archsync.sh" = {
+    text = ''
+#!/bin/bash
+set -e
+
+cleanup() {
+	local code=$?
+	if [ $code -eq 0 ]; then
+		notify-send "Saved!"
+	else
+		notify-send "Error: $code"
+	fi
+}
+trap cleanup EXIT
+
+pacman -Qqe > $HOME/.config/home-manager/pkglist.txt
+
+(
+  cd $HOME/.config/home-manager
+  git add -u
+  git commit -m "Timestamp: $(date)"
+  git push
+)
+
+EOF
+    '';
+    executable = true;
+};
+
+
 }
