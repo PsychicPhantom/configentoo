@@ -401,7 +401,7 @@ alacritty -e nano ~/.config/home-manager/home.nix
     executable = true;
 };
 
-  home.file.".local/bin/archsync.sh" = {
+  home.file.".local/bin/archsync" = {
     text = ''
 #!/bin/bash
 set -e
@@ -424,8 +424,6 @@ pacman -Qqe > $HOME/.config/home-manager/pkglist.txt
   git commit -m "Timestamp: $(date)"
   git push
 )
-
-EOF
     '';
     executable = true;
 };
