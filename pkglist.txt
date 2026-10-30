@@ -4,10 +4,12 @@ arch-install-scripts
 base
 base-devel
 brightnessctl
+discord
 distro-grub-themes-arch
 dmidecode
 dunst
 efibootmgr
+fastfetch
 feh
 firefox
 flameshot

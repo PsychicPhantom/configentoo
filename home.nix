@@ -79,7 +79,15 @@
     # managed_by = "home_manager"
     # inline = "yes"
   # '';
-  
+  # home.pointerCursor = {
+  #  name = "ArchCusorComplete";
+  #  package = pkgs.xcursor-arch-cursor-complete;
+  #  size = 24;
+  #  gtk.enable = true;
+  #  x11.enable = true;
+  #  };
+
+
   home.file.".gitconfig".text=''
     [user]
     	name = PsychicPhantom
@@ -145,6 +153,7 @@ bindsym $mod+Shift+backslash exec ~/edit_i3.sh
 bindsym $mod+Shift+s exec ~/archsync.sh
 bindsym XF86MonBrightnessUp exec brightnessctl set +5%
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym --whole-window $mod+button3 exec --no-startup-id ~/.config/xmenu/menu.sh
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -377,6 +386,7 @@ tztime local {
 Xcursor.theme: ArchCursorComplete
 Xcursor.size: 32
 '';
+
   home.file.".bashrc".text = ''
 #
 # ~/.bashrc
@@ -427,6 +437,21 @@ pacman -Qqe > $HOME/.config/home-manager/pkglist.txt
     '';
     executable = true;
 };
+  xdg.configFile."xmenu/menu.sh".text = ''
+#!/bin/sh
 
+xmenu <<EOF | sh
+Applications
+  Terminal	alacritty
+  Browser	firefox
+System
+  Refresh	i3-msg restart; alacritty -e "source $HOME/.bashrc; exec bash"
+  ---
+  Sleep	systemctl suspend
+  Reboot	systemctl reboot
+  Shutdown	systemctl poweroff
+EOF
 
+xdotool key --clearmodifier Escape
+'';
 }
