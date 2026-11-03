@@ -418,6 +418,7 @@ alacritty -e nano ~/.config/home-manager/home.nix
 
   home.file.".local/bin/archsync" = {
     text = ''
+export SSH_AUTH_SOCK=$(ssh-tpm-agent --print-socket)
 #!/bin/bash
 set -e
 
