@@ -23,6 +23,7 @@ i3blocks
 i3lock
 i3status
 libnotify
+libreoffice-fresh
 lightdm
 lightdm-gtk-greeter
 linux

@@ -144,6 +144,7 @@ exec --no-startup-id idesk
 exec --no-startup-id xbindkeys
 exec --no-startup-id redshift -O 3500
 exec --no-startup-id ssh-tpm-agent &
+exec --no-startup-id ~/.local/bin/archsync
 
 # My binds
 bindsym $mod+t exec pcmanFM
