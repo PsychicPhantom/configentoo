@@ -468,3 +468,4 @@ gtk-cursor-theme-name=ArchCursorComplete
 }
 
 # this is a test
+# fuck you git
