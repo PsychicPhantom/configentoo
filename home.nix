@@ -153,7 +153,7 @@ bindsym $mod+backslash exec ~/edit-home-manager-nix.sh
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 bindsym $mod+Shift+backslash exec ~/edit_i3.sh
-bindsym $mod+Shift+s exec ~/.local/bin/archsync
+bindsym $mod+Shift+s exec --no-startup-id ~/.local/bin/archsync
 bindsym XF86MonBrightnessUp exec brightnessctl set +5%
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 bindsym --whole-window $mod+button3 exec --no-startup-id ~/.config/xmenu/menu.sh
