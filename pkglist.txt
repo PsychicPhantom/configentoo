@@ -1,5 +1,8 @@
+7zip
 alacritty
 alsa-utils
+android-tools
+android-udev
 arch-install-scripts
 base
 base-devel
@@ -24,11 +27,13 @@ lightdm
 lightdm-gtk-greeter
 linux
 linux-firmware
+localsend
 man-db
 nano
 networkmanager
 nix
 nnn
+ntfs-3g
 openssh
 os-prober
 pavucontrol

@@ -5,7 +5,9 @@
   # manage.
   home.username = "psychicphantom";
   home.homeDirectory = "/home/psychicphantom";
-  home.sessionPath = [ "$HOME/.local/bin" ];
+  home.sessionPath = [
+    "$HOME/.local/bin"
+  ];
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
@@ -402,6 +404,8 @@ PS1='[\u@\h \W]\$ '
 export TERMINAL=alacritty
 alias hms="home-manager switch --flake $HOME/.config/home-manager -b backup"
 export SSH_AUTH_SOCK=$(ssh-tpm-agent --print-socket)
+. "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+
 '';
 
   home.file."edit_i3.sh" = {
@@ -454,4 +458,10 @@ EOF
 
 xdotool key --clearmodifier Escape
 '';
+  xdg.configFile."gtk-3.0/settings.ini".text = ''
+[Settings]
+gtk-cursor-theme-name=ArchCursorComplete
+'';
+
+
 }
