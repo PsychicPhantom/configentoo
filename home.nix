@@ -449,6 +449,7 @@ git add -u
 git diff --cached --quiet || git commit -m "Timestamp: $(date)"
 git push
 
+xdotool key --clearmodifier Escape
     '';
     executable = true;
 };
