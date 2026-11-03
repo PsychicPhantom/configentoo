@@ -435,7 +435,7 @@ pacman -Qqe > $HOME/.config/home-manager/pkglist.txt
 
 (
   cd $HOME/.config/home-manager
-  git add -u
+  git add home.nix flake.nix flake.lock pkglist.txt
   git commit -m "Timestamp: $(date)"
   git push
 )
