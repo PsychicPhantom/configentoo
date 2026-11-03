@@ -145,6 +145,8 @@ exec --no-startup-id xbindkeys
 exec --no-startup-id redshift -O 3500
 exec --no-startup-id ssh-tpm-agent &
 exec --no-startup-id ~/.local/bin/archsync
+exec_always echo "BRI: $(($(brightnessctl get) * 100 / $(brightnessctl max)))%" > /tmp/brightness
+
 
 # My binds
 bindsym $mod+t exec pcmanFM
@@ -154,8 +156,10 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 bindsym $mod+Shift+backslash exec ~/edit_i3.sh
 bindsym $mod+Shift+s exec --no-startup-id ~/.local/bin/archsync
-bindsym XF86MonBrightnessUp exec brightnessctl set +5%
-bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym XF86MonBrightnessUp exec brightnessctl set +5% && \
+	echo "BRI: $(($(brightnessctl get) * 100 / $(brightnessctl max)))%" > /tmp/brightness && $refresh_i3status
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-  && \
+        echo "BRI: $(($(brightnessctl get) * 100 / $(brightnessctl max)))%" > /tmp/brightness && $refresh_i3status
 bindsym --whole-window $mod+button3 exec --no-startup-id ~/.config/xmenu/menu.sh
 
 # Use pactl to adjust volume in PulseAudio.
@@ -332,6 +336,7 @@ general {
 # order += "ipv6"
 order += "wireless _first_"
 order += "volume master"
+order += "read_file brightness"
 order += "battery all"
 order += "cpu_temperature 0"
 order += "load"
@@ -350,6 +355,10 @@ volume master {
 	format_muted = "MUTED"
 	device = "default"
 	mixer = "Master"
+}
+
+read_file brightness {
+	path = "/tmp/brightness"
 }
 
 battery all {
