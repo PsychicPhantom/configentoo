@@ -433,11 +433,11 @@ trap cleanup EXIT
 
 pacman -Qqe > $HOME/.config/home-manager/pkglist.txt
 
-(
-  cd $HOME/.config/home-manager
-  git add home.nix flake.nix flake.lock pkglist.txt
-  git commit -m "Timestamp: $(date)"
-  git push
+
+cd $HOME/.config/home-manager
+git add -u
+git diff --cached --quiet || git commit -m "Timestamp: $(date)"
+git push
 )
     '';
     executable = true;
