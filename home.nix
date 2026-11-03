@@ -418,8 +418,8 @@ alacritty -e nano ~/.config/home-manager/home.nix
 
   home.file.".local/bin/archsync" = {
     text = ''
-export SSH_AUTH_SOCK=$(ssh-tpm-agent --print-socket)
 #!/bin/bash
+export SSH_AUTH_SOCK=$(ssh-tpm-agent --print-socket)
 set -e
 
 cleanup() {
@@ -439,7 +439,7 @@ cd $HOME/.config/home-manager
 git add -u
 git diff --cached --quiet || git commit -m "Timestamp: $(date)"
 git push
-)
+
     '';
     executable = true;
 };
