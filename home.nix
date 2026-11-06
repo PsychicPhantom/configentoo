@@ -469,7 +469,7 @@ git add -u
 git diff --cached --quiet || git commit -m "Timestamp: $(date)"
 git push
 
-xdotool key --clearmodifier Escape
+xsetroot -cursor_name left_ptr
     '';
     executable = true;
 };
@@ -489,7 +489,7 @@ System
   Shutdown	systemctl poweroff
 EOF
 
-xdotool key --clearmodifier Escape
+xsetroot -cursor_name left_ptr
     '';
     executable = true;
 };
