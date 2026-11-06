@@ -144,7 +144,7 @@ exec --no-startup-id idesk
 exec --no-startup-id xbindkeys
 exec --no-startup-id redshift -O 3500
 exec --no-startup-id ssh-tpm-agent &
-exec --no-startup-id ~/.local/bin/archsync
+exec --no-startup-id bash -c "until nm-online -q; do sleep 0.5; done && ~/.local/bin/archsync"
 exec_always echo "BRI: $(($(brightnessctl get) * 100 / $(brightnessctl max)))%" > /tmp/brightness
 
 
