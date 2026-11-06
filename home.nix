@@ -149,9 +149,9 @@ exec_always echo "BRI: $(($(brightnessctl get) * 100 / $(brightnessctl max)))%" 
 
 
 # My binds
-bindsym $mod+t exec pcmanFM
+bindsym $mod+t exec pcmanfm
 bindsym Print exec flameshot gui
-bindsym $mod+backslash exec ~/edit-home-manager-nix.sh
+bindsym $mod+backslash exec ~/.local/bin/edit-hm
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 bindsym $mod+Shift+backslash exec ~/edit_i3.sh
@@ -177,7 +177,7 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 
 # start a terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec xterm
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -397,6 +397,26 @@ tztime local {
   home.file.".Xresources".text = ''
 Xcursor.theme: ArchCursorComplete
 Xcursor.size: 32
+
+XTerm*faceName:	Liberation Mono
+XTerm*faceSize:	18
+XTerm*faceNameDoublesize:	Liberation Mono
+XTerm*background:	#0d0d0d
+XTerm*foreground:	#e8e8e8
+XTerm*saveLines:	10000
+XTerm*highlightColor:	#3a3a3a
+XTerm*scrollBar:	false
+XTerm*locale:	true
+XTerm*utf8:	1
+XTerm*utf8Title:	true
+XTerm*metaSendsEscape:	true
+XTerm*boldMode:	true
+XTerm*colorBDMode:	true
+XTerm*termName:	xterm
+XTerm*VT100.translations:	#override \
+  Ctrl Shift <Key>C: copy-selection(CLIPBOARD) \n\
+  Ctrl Shift <Key>V: insert-selection(CLIPBOARD)
+XTerm*eightBitInput:	false
 '';
 
   home.file.".bashrc".text = ''
@@ -411,7 +431,7 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 PS1='[\u@\h \W]\$ '
 
-export TERMINAL=alacritty
+export TERMINAL=xterm
 alias hms="home-manager switch --flake $HOME/.config/home-manager -b backup"
 export SSH_AUTH_SOCK=$(ssh-tpm-agent --print-socket)
 . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
@@ -420,7 +440,7 @@ export SSH_AUTH_SOCK=$(ssh-tpm-agent --print-socket)
 
   home.file."edit_i3.sh" = {
     text = ''
-alacritty -e nano ~/.config/home-manager/home.nix
+xterm -e nano ~/.config/home-manager/home.nix
     '';
     executable = true;
 };
@@ -453,30 +473,35 @@ xdotool key --clearmodifier Escape
     '';
     executable = true;
 };
-  xdg.configFile."xmenu/menu.sh".text = ''
+  xdg.configFile."xmenu/menu.sh" = {
+    text = ''
 #!/bin/sh
 
 xmenu <<EOF | sh
 Applications
-  Terminal	alacritty
+  Terminal	xterm
   Browser	firefox
 System
-  Refresh	i3-msg restart; alacritty -e "source $HOME/.bashrc; exec bash"
-  ---
+  Refresh	i3-msg restart
+---
   Sleep	systemctl suspend
   Reboot	systemctl reboot
   Shutdown	systemctl poweroff
 EOF
 
 xdotool key --clearmodifier Escape
-'';
+    '';
+    executable = true;
+};
   xdg.configFile."gtk-3.0/settings.ini".text = ''
 [Settings]
 gtk-cursor-theme-name=ArchCursorComplete
 '';
-
+  home.file.".local/bin/edit-hm" = {
+    text = ''
+    xterm -e nvim $HOME/.config/home-manager/home.nix
+    '';
+    executable = true;
+};
 
 }
-
-# this is a test
-# fuck you git

@@ -1,5 +1,4 @@
 7zip
-alacritty
 alsa-utils
 android-tools
 android-udev
@@ -31,6 +30,7 @@ linux-firmware
 localsend
 man-db
 nano
+neovim
 networkmanager
 nix
 nnn
@@ -44,6 +44,7 @@ pulseaudio-alsa
 redshift
 rofi
 ssh-tpm-agent
+strace
 tpm2-tools
 wireplumber
 xbindkeys
