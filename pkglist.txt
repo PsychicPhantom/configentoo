@@ -17,6 +17,7 @@ firefox
 flameshot
 git
 grub
+hdparm
 i3-wm
 i3blocks
 i3lock
