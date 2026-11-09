@@ -28,6 +28,7 @@ lightdm
 lightdm-gtk-greeter
 linux
 linux-firmware
+linux-lts
 localsend
 man-db
 nano
