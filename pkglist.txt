@@ -47,6 +47,7 @@ redshift
 rofi
 ssh-tpm-agent
 strace
+tlp
 tpm2-tools
 wireplumber
 xbindkeys
