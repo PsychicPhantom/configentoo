@@ -109,4 +109,3 @@ xorg-xwininfo
 xorg-xwud
 xterm
 yay
-yay-debug
