@@ -11,6 +11,7 @@ dell-bios-fan-control-git
 discord
 distro-grub-themes-arch
 dmidecode
+dnsmasq
 dunst
 efibootmgr
 fastfetch
@@ -27,12 +28,14 @@ i3status
 i8kutils
 libnotify
 libreoffice-fresh
+libvirt
 lightdm
 lightdm-gtk-greeter
 linux
 linux-firmware
 linux-lts
 localsend
+lynx
 man-db
 nano
 neovim
@@ -46,6 +49,8 @@ pavucontrol
 pcmanfm
 pipewire-pulse
 pulseaudio-alsa
+qemu-base
+qemu-full
 redshift
 rofi
 ssh-tpm-agent
@@ -53,6 +58,7 @@ strace
 tcl
 tlp
 tpm2-tools
+virt-manager
 wireplumber
 xbindkeys
 xcursor-arch-cursor-complete
