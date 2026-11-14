@@ -1,0 +1,6 @@
+#!/sbin/openrc-run
+name="Nix daemon"
+description="nix-daemon"
+command="/nix/var/nix/profiles/default/bin/nix-daemon"
+command_background=true
+pidfile="/run/nix-daemon.pid"
