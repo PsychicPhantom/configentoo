@@ -144,7 +144,7 @@ exec --no-startup-id dunst &
 exec --no-startup-id idesk
 exec --no-startup-id xbindkeys
 exec --no-startup-id redshift -O 3500
-# exec --no-startup-id ssh-tpm-agent &
+exec --no-startup-id ssh-tpm-agent &
 # exec --no-startup-id bash -c "until nm-online -q; do sleep 0.5; done && ~/.local/bin/archsync"
 exec_always echo "BRI: $(($(cat /sys/class/backlight/intel_backlight/brightness) * 100 / $(cat /sys/class/backlight/intel_backlight/max_brightness)))%" > /tmp/brightness
 
@@ -438,7 +438,7 @@ PS1='[\u@\h \W]\$ '
 
 export TERMINAL=xterm
 alias hms="home-manager switch --flake $HOME/.config/home-manager -b backup"
-# export SSH_AUTH_SOCK=$(ssh-tpm-agent --print-socket)
+export SSH_AUTH_SOCK=$(ssh-tpm-agent --print-socket)
 . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
 # . "$HOME/.bash_profile"
 
@@ -465,7 +465,7 @@ xterm -e nano ~/.config/home-manager/home.nix
   home.file.".local/bin/archsync" = {
     text = ''
 #!/bin/bash
-# export SSH_AUTH_SOCK=$(ssh-tpm-agent --print-socket)
+export SSH_AUTH_SOCK=$(ssh-tpm-agent --print-socket)
 set -e
 
 cleanup() {
@@ -478,7 +478,7 @@ cleanup() {
 }
 trap cleanup EXIT
 
-pacman -Qqe > $HOME/.config/home-manager/pkglist.txt
+# pacman -Qqe > $HOME/.config/home-manager/pkglist.txt
 
 
 cd $HOME/.config/home-manager
