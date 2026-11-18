@@ -162,11 +162,14 @@ bindsym XF86MonBrightnessUp exec bright 5 && \
 bindsym XF86MonBrightnessDown exec bright -5  && \
         echo "BRI: $(($(cat /sys/class/backlight/intel_backlight/brightness) * 100 / $(cat /sys/class/backlight/intel_backlight/max_brightness)))%" > /tmp/brightness && $refresh_i3status
 bindsym --whole-window $mod+button3 exec --no-startup-id ~/.config/xmenu/menu.sh
+bindsym Shift+XF86MonBrightnessDown exec bright -100 && \
+	echo "BRI: $(($(cat /sys/class/backlight/intel_backlight/brightness) * 100 / $(cat /sys/class/backlight/intel_backlight/max_brightness)))%" > /tmp/brightness && $refresh_i3status
+
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
@@ -315,7 +318,7 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command sleep 3 && i3status
+        status_command i3status
 	font pango:monospace 14
 	height 30
 }
@@ -368,7 +371,7 @@ battery all {
 
 cpu_temperature 0 {
 	format = "TEMP: %degrees C"
-	path = "/sys/class/thermal/thermal_zone3/temp"
+	path = "/sys/class/thermal/thermal_zone0/temp"
 }
 
 load {

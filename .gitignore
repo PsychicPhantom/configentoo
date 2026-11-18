@@ -1,0 +1,3 @@
+portage/*
+!.gitignore
+!portage/world
