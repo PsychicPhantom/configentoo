@@ -145,7 +145,7 @@ exec --no-startup-id idesk
 exec --no-startup-id xbindkeys
 exec --no-startup-id redshift -O 3500
 exec --no-startup-id ssh-tpm-agent &
-exec --no-startup-id exec sleep 5 && ~/.local/bin/syngentoo"
+exec --no-startup-id exec sleep 5 && ~/.local/bin/syngentoo
 exec_always echo "BRI: $(($(cat /sys/class/backlight/intel_backlight/brightness) * 100 / $(cat /sys/class/backlight/intel_backlight/max_brightness)))%" > /tmp/brightness
 
 
@@ -166,6 +166,9 @@ bindsym --whole-window $mod+button3 exec --no-startup-id ~/.config/xmenu/menu.sh
 bindsym Shift+XF86MonBrightnessDown exec bright -100 && \
 	echo "BRI: $(($(cat /sys/class/backlight/intel_backlight/brightness) * 100 / $(cat /sys/class/backlight/intel_backlight/max_brightness)))%" > /tmp/brightness && $refresh_i3status
 bindsym $mod+d exec --no-startup-id vesktop-bin
+bindsym $mod+Shift+i exec sudo netoff 2>&/dev/null
+bindsym $mod+i exec sudo neton 2>&/dev/null
+
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -569,6 +572,19 @@ stop() {
 Inherits=gentoo-silver
     '';
 };
+  home.file.".local/bin/netoff" = {
+    text = ''
+iptables -A OUTPUT -p tcp --dport 443 -j DROP
+iptables -A OUTPUT -p tcp --dport 80 -j DROP
+'';
+    executable = true;
+};
 
-
+  home.file.".local/bin/neton" = {
+    text = ''
+iptables -D OUTPUT -p tcp --dport 443 -j DROP
+iptables -D OUTPUT -p tcp --dport 80 -j DROP
+'';
+    executable = true;
+};
 }

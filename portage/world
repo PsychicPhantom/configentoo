@@ -20,3 +20,4 @@ sys-kernel/installkernel
 sys-power/acpid
 virtual/wine
 x11-libs/gtk+
+x11-misc/pcmanfm
