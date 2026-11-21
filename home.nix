@@ -137,7 +137,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 
 # Rice
-exec --no-startup-id feh --bg-scale ~/Images/Wallpapers/wall.png
+exec --no-startup-id feh --bg-scale ~/Images/Wallpapers/wall.*
 exec --no-startup-id xrdb merge ~/.Xresources
 exec --no-startup-id xsetroot -cursor_name left_ptr
 exec --no-startup-id dunst &
@@ -145,18 +145,19 @@ exec --no-startup-id idesk
 exec --no-startup-id xbindkeys
 exec --no-startup-id redshift -O 3500
 exec --no-startup-id ssh-tpm-agent &
-# exec --no-startup-id bash -c "until nm-online -q; do sleep 0.5; done && ~/.local/bin/archsync"
+exec --no-startup-id exec sleep 5 && ~/.local/bin/syngentoo"
 exec_always echo "BRI: $(($(cat /sys/class/backlight/intel_backlight/brightness) * 100 / $(cat /sys/class/backlight/intel_backlight/max_brightness)))%" > /tmp/brightness
 
 
 # My binds
 bindsym $mod+t exec pcmanfm
 bindsym Print exec flameshot gui
+bindsym $mod+Print exec flameshot full
 bindsym $mod+backslash exec ~/.local/bin/edit-hm
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 bindsym $mod+Shift+backslash exec ~/edit_i3.sh
-bindsym $mod+Shift+s exec --no-startup-id ~/.local/bin/archsync
+bindsym $mod+Shift+s exec --no-startup-id ~/.local/bin/syngentoo
 bindsym XF86MonBrightnessUp exec bright 5 && \
 	echo "BRI: $(($(cat /sys/class/backlight/intel_backlight/brightness) * 100 / $(cat /sys/class/backlight/intel_backlight/max_brightness)))%" > /tmp/brightness && $refresh_i3status
 bindsym XF86MonBrightnessDown exec bright -5  && \
@@ -164,7 +165,7 @@ bindsym XF86MonBrightnessDown exec bright -5  && \
 bindsym --whole-window $mod+button3 exec --no-startup-id ~/.config/xmenu/menu.sh
 bindsym Shift+XF86MonBrightnessDown exec bright -100 && \
 	echo "BRI: $(($(cat /sys/class/backlight/intel_backlight/brightness) * 100 / $(cat /sys/class/backlight/intel_backlight/max_brightness)))%" > /tmp/brightness && $refresh_i3status
-
+bindsym $mod+d exec --no-startup-id vesktop-bin
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -189,7 +190,7 @@ bindsym $mod+Shift+q kill
 # start dmenu (a program launcher)
 # bindsym $mod+d exec --no-startup-id dmenu_run
 # A more modern dmenu replacement is rofi:
-bindcode $mod+40 exec "rofi -modi drun,run -show drun"
+# bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
 # .desktop file. It is a wrapper around dmenu, so you need that installed.
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
@@ -465,7 +466,7 @@ xterm -e nano ~/.config/home-manager/home.nix
     executable = true;
 };
 
-  home.file.".local/bin/archsync" = {
+  home.file.".local/bin/syngentoo" = {
     text = ''
 #!/bin/bash
 export SSH_AUTH_SOCK=$(ssh-tpm-agent --print-socket)
@@ -489,7 +490,7 @@ git add -u
 git diff --cached --quiet || git commit -m "Timestamp: $(date)"
 git push
 
-xsetroot -cursor_name left_ptr
+# xsetroot -cursor_name left_ptr
     '';
     executable = true;
 };
